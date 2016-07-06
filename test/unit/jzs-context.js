@@ -4,6 +4,7 @@ describe('jzsContext', () => {
   describe('Greet function', () => {
     beforeEach(() => {
       spy(jzsContext, 'greet');
+
       jzsContext.greet();
     });
 
