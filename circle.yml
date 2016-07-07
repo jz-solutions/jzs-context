@@ -12,5 +12,5 @@ deployment:
   npm:
     branch: master
     commands:
-      - npm run ci-publish
+      - npm run deploy
 
