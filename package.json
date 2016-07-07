@@ -1,6 +1,6 @@
 {
   "name": "jzs-context",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "js global context",
   "main": "dist/jzs-context.js",
   "scripts": {
