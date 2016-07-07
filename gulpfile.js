@@ -79,10 +79,10 @@ function build() {
     .pipe(gulp.dest(destinationFolder));
 }
 
-function _mocha() {
+function _mocha(reporter) {
   return gulp.src(['test/setup/node.js', 'test/unit/**/*.js'], {read: false})
     .pipe($.mocha({
-      reporter: 'dot',
+      reporter: reporter,
       globals: Object.keys(mochaGlobals.globals),
       ignoreLeaks: false
     }));
@@ -94,7 +94,12 @@ function _registerBabel() {
 
 function test() {
   _registerBabel();
-  return _mocha();
+  return _mocha('spec');
+}
+
+function testCI() {
+  _registerBabel();
+  return _mocha('xunit-file');
 }
 
 function coverage(done) {
@@ -109,7 +114,7 @@ function coverage(done) {
     });
 }
 
-const watchFiles = ['src/**/*', 'test/**/*', 'package.json', '**/.eslintrc', '.jscsrc'];
+const watchFiles = ['src/**/*', 'test/**/*', 'package.json', '**/.eslintrc', '.jscsrc', 'circle.yml'];
 
 // Run the headless unit tests as you make changes.
 function watch() {
@@ -195,6 +200,8 @@ gulp.task('test-browser', ['lint', 'clean-tmp'], testBrowser);
 
 // Run the headless unit tests as you make changes.
 gulp.task('watch', watch);
+
+gulp.task('ci:build', testCI);
 
 // An alias of test
 gulp.task('default', ['test']);
