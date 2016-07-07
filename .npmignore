@@ -27,5 +27,10 @@ bower_components
 coverage
 tmp
 
+test
+circle.yml
+.eslintrc
+.editorconfig
+
 # Users Environment Variables
 .lock-wscript
